@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { storeContext } from "../Context/StoreContext";
 import { useContext, useEffect, useState } from "react";
-import Spinner from "../layout/Spinner";
+import Loading from "../Layout/Loading";
 import { toast } from "react-toastify";
 
 function Appointment() {
@@ -37,13 +37,13 @@ function Appointment() {
     }
   }
   if (isLoading) {
-    return <Spinner />;
+    return <Loading />;
   }
 
   return (
 <>
 
-
+<p>Pages</p>
 
 
 

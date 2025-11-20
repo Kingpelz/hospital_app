@@ -1,6 +1,6 @@
 import React from "react";
 
-function Spinner() {
+function Loading() {
   return (
     <div>
      <div className="flex items-center justify-center h-screen">
@@ -10,5 +10,5 @@ function Spinner() {
   );
 }
 
-export default Spinner;
+export default Loading;
 

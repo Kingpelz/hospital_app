@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { storeContext } from "../Context/StoreContext";
 import { toast } from "react-toastify"; 
-import Spinner from "../layout/Spinner";
+import Loading from "../Layout/Loading";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,7 +46,7 @@ function Register() {
   }
 
   if(isLoading){
-    return <Spinner />
+    return <Loading />
   }
 
   function toggle() {

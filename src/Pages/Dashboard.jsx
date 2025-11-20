@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { useState, useEffect } from "react";
-import Spinner from "../layout/Spinner";
+import Loading from "../Layout/Loading.jsx";
 import { useContext } from "react";
 import { storeContext } from "../Context/StoreContext.jsx";
 import { toast } from "react-toastify";
@@ -140,7 +140,7 @@ function Dashboard() {
   }
 
   if (isLoading) {
-    return <Spinner />;
+    return <Loading />;
   }
 
   return (

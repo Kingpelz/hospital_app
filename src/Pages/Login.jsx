@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import Spinner from "../layout/Spinner";
+import Loading from "../Layout/Loading";
 import { toast } from "react-toastify";
 import { storeContext } from "../Context/StoreContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -52,7 +52,7 @@ function Login() {
     }
   }
   if (isLoading) {
-    return <Spinner />;
+    return <Loading />;
   }
 
   function toggle() {
