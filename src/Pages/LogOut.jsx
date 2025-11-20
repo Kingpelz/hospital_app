@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-function Signout() {
+function LogOut() {
     const {isAuth, setIsAuth} = useContext(storeContext)
 
     const navigate = useNavigate()
@@ -39,4 +39,4 @@ function Signout() {
     </div>
   );
 }
-export default Signout
+export default LogOut
