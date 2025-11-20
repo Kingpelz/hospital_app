@@ -1,0 +1,2 @@
+This is my hospital scheduling app that allows users to schedule appointment from list of doctors available in the app, delete an appointment, update an appointment, See all schedules on the app. Update his profile , login and log out at will.
+It was styled with tailwind and i used my react native skills to create this app.
