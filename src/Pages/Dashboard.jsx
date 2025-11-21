@@ -1,10 +1,10 @@
-import React, { use } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import Loading from "../Layout/Loading.jsx";
 import { useContext } from "react";
 import { storeContext } from "../Context/StoreContext.jsx";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Await, Link } from "react-router-dom";
 import { FaUserDoctor } from "react-icons/fa6";
 
 function Dashboard() {
@@ -31,7 +31,7 @@ function Dashboard() {
 
   useEffect(() => {
     console.log(surgeries);
-    setLocalSurgeries(surgeries)
+    setLocalSurgeries(surgeries);
   }, [surgeries]);
 
   async function createAppointment() {
@@ -76,8 +76,27 @@ function Dashboard() {
     }
   }
 
-  async function updatehandler() {
+  //   async function updateHandler(id) {
+  // try {
+  //   const userConfirmed = window.confirm(
+  //     "Are you sure you want to update this appointment?"
+  //   )
+  //   if()
+  // } catch (error) {
+
+  // }
+  //   }
+
+  async function updatehandler(surgeryId) {
     try {
+      const userConfirmed = window.confirm(
+        "Are you sure you want to update this appointment?"
+      );
+      if (!userConfirmed) {
+        toast.error("Appointment updating cancelled");
+        return;
+      }
+      console.log(surgeryId);
       setIsLoading(true);
       const response = await fetch(`${apiUrl}/surgery/update/${surgeryId}`, {
         method: "PUT",
@@ -94,6 +113,7 @@ function Dashboard() {
         }),
       });
       const data = await response.json();
+      clg;
       if (response.status === 200) {
         toast.success(data.message);
         clearForm();
@@ -154,9 +174,9 @@ function Dashboard() {
       <div className="bg-black bg-opacity-70 min-h-screen">
         <header className="bg-gray-700 text-white p-6 shadow-lg">
           <h2 className="text-3xl font-bold tracking-tight">
-            Welcome to your Carelink Hospital 👋     Your health, your schedule — all in one place.
+            Welcome to your Carelink Hospital 👋 Your health, your schedule —
+            all in one place.
           </h2>
-         
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
@@ -210,7 +230,7 @@ function Dashboard() {
           <main className="col-span-1 lg:col-span-3 bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 space-y-8">
             <form
               onSubmit={(e) => {
-                editmode ? updatehandler() : submithandler(e);
+                editmode ? updatehandler(surgeryId) : submithandler(e);
               }}
               className="space-y-8 bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8"
             >
@@ -375,7 +395,7 @@ function Dashboard() {
                           </td>
                           <td className="px-6 py-4 flex flex-wrap gap-2 justify-center">
                             <Link
-                              to={`/appointment/${surgery.id}`}
+                              to={`/appointment`}
                               className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                             >
                               View More

@@ -12,7 +12,7 @@ function Appointment() {
   const surgeryId = params.surgeryId;
 
   useEffect(() => {
-    getSurgery(surgeryId);
+    getOneSurgery(surgeryId);
   }, []);
 
   async function getOneSurgery(id) {
@@ -44,7 +44,7 @@ function Appointment() {
 <>
 
 
-
+<p>Home</p>
 
 
 
