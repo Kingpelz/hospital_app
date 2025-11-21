@@ -386,7 +386,7 @@ function Dashboard() {
                           </td>
                           <td className="px-6 py-4 flex flex-wrap gap-2 justify-center">
                             <Link
-                              to={`/appointment`}
+                              to={`/appointment/${surgeryId}`}
                               className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                             >
                               View More
