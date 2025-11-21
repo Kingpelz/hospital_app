@@ -96,29 +96,6 @@ async function getAllProfile() {
     setIsLoading(false);
   }
 }
- async function getOneSurgery(id){
-   setIsLoading (true);
-   const response = await fetch(`${apiUrl}/surgery/single/${id}`, {
-     method: "GET",
-     headers: {
-       "Content-Type": "application/json",
-       Authorization: `Bearer ${token}`,
-      },
-    });
-    try{
-
-    const data = await response.json();
-  
-    if(response.ok){
-      setSurgery(data.surgery)
-      setIsLoading(false);
-  }
-
-  } catch (error){
-    console.log(error);
-    setIsLoading(false);
-  }
-  }
 
 
   const contextObj = {
