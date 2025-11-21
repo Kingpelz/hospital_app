@@ -96,7 +96,6 @@ function Dashboard() {
         toast.error("Appointment updating cancelled");
         return;
       }
-      console.log(surgeryId);
       setIsLoading(true);
       const response = await fetch(`${apiUrl}/surgery/update/${surgeryId}`, {
         method: "PUT",
@@ -230,7 +229,7 @@ function Dashboard() {
           <main className="col-span-1 lg:col-span-3 bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 space-y-8">
             <form
               onSubmit={(e) => {
-                editmode ? updatehandler(surgeryId) : submithandler(e);
+                editmode ? updatehandler(id) : submithandler(e);
               }}
               className="space-y-8 bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8"
             >
