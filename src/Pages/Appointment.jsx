@@ -13,6 +13,7 @@ function Appointment() {
 
   useEffect(() => {
     getOneSurgery(id);
+    console.log(id);
   }, []);
 
   

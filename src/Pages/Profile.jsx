@@ -1,12 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { data, Link } from "react-router-dom";
-
+import { storeContext } from "../Context/StoreContext";
+import { useContext } from "react";
 function Profile() {
- 
+   
+const [profile, setProfile] = useState([]);
+const [user, setUser] = useState(null);
+const [isLoading, setIsLoading, apiUrl, token ,Bio, fullName, phoneNumber, email] = useContext(storeContext); 
+
+ useEffect (() => {
+  getProfile();
+
+ }, [])
+async function getProfile() {
+  try {
+    setIsLoading(true)
+    const response = await fetch(`${apiUrl}/profile/`,{
+      method: "GET",
+      headers:{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        Bio, fullName, phoneNumber, email
+      })
+    })
+  } catch (error) {
+    
+  }
+}
 
 
-
-  const [user, setUser] = useState(null);
+  
   
 
   return (

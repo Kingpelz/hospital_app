@@ -4,7 +4,7 @@ import Loading from "../Layout/Loading.jsx";
 import { useContext } from "react";
 import { storeContext } from "../Context/StoreContext.jsx";
 import { toast } from "react-toastify";
-import { Await, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaUserDoctor } from "react-icons/fa6";
 
 function Dashboard() {
@@ -78,7 +78,18 @@ function Dashboard() {
 
  
 
-  async function updatehandler(surgeryId) {
+ async function updatehandler(e) {
+    e.preventDefault();
+    console.log(surgeryId,
+        surgeryType,
+        doctorId,
+        description,
+        surgeryDate,
+        time,
+        apiUrl,
+        "token",
+        token
+      );
     try {
       const userConfirmed = window.confirm(
         "Are you sure you want to update this appointment?"
@@ -89,6 +100,8 @@ function Dashboard() {
       }
       setIsLoading(true);
       console.log(apiUrl);
+
+
       const response = await fetch(`${apiUrl}/surgery/update/${surgeryId}`, {
         method: "PUT",
         headers: {
@@ -104,7 +117,7 @@ function Dashboard() {
         }),
       });
       const data = await response.json();
-      clg;
+      console.log(data);
       if (response.status === 200) {
         toast.success(data.message);
         clearForm();

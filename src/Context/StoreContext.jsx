@@ -99,7 +99,6 @@ async function getAllProfile() {
 
 
   const contextObj = {
-    getOneSurgery,
     surgery,
     showPassword,
     setShowPassword,
