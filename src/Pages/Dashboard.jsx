@@ -154,11 +154,9 @@ function Dashboard() {
       <div className="bg-black bg-opacity-70 min-h-screen">
         <header className="bg-gray-700 text-white p-6 shadow-lg">
           <h2 className="text-3xl font-bold tracking-tight">
-            Welcome to your dashboard 👋
+            Welcome to your Carelink Hospital 👋     Your health, your schedule — all in one place.
           </h2>
-          <p className="text-sm text-gray-200 mt-1">
-            Your health, your schedule — all in one place.
-          </p>
+         
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
@@ -342,7 +340,7 @@ function Dashboard() {
                       Description
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                      Doctor
+                      Doctor Name
                     </th>
                     <th className="px-6 py-3 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                       Actions
@@ -373,9 +371,9 @@ function Dashboard() {
                             {surgery.description}
                           </td>
                           <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-                            {surgery.doctorId}
+                            {surgery.doctor?.name}
                           </td>
-                          <tr className="px-6 py-4 flex flex-wrap gap-2 justify-center">
+                          <td className="px-6 py-4 flex flex-wrap gap-2 justify-center">
                             <Link
                               to={`/appointment/${surgery.id}`}
                               className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
@@ -388,7 +386,7 @@ function Dashboard() {
                                 setEditMode(true);
                                 setDescription(surgery.description);
                                 setSurgeryDate(surgery.surgeryDate);
-                                setDoctorId(surgery.doctorId);
+                                setDoctorId(surgery.doctor?.name);
                                 setTime(surgery.time);
                                 setSurgeryType(surgery.surgeryType);
                               }}
@@ -405,7 +403,7 @@ function Dashboard() {
                             >
                               Delete
                             </button>
-                          </tr>
+                          </td>
                         </tr>
                       );
                     })

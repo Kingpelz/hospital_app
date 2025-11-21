@@ -12,13 +12,13 @@ function Appointment() {
   const surgeryId = params.surgeryId;
 
   useEffect(() => {
-    getSurgery();
+    getSurgery(surgeryId);
   }, []);
 
-  async function getSurgery() {
+  async function getOneSurgery(id) {
     try {
       setIsLoading(true);
-      const response = await fetch(`${apiUrl}/single/${surgeryId}`, {
+      const response = await fetch(`${apiUrl}/surgery/single/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function Appointment() {
   return (
 <>
 
-<p>Pages</p>
+
 
 
 
