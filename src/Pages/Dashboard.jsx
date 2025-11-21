@@ -76,16 +76,7 @@ function Dashboard() {
     }
   }
 
-  //   async function updateHandler(id) {
-  // try {
-  //   const userConfirmed = window.confirm(
-  //     "Are you sure you want to update this appointment?"
-  //   )
-  //   if()
-  // } catch (error) {
-
-  // }
-  //   }
+ 
 
   async function updatehandler(surgeryId) {
     try {
@@ -97,6 +88,7 @@ function Dashboard() {
         return;
       }
       setIsLoading(true);
+      console.log(apiUrl);
       const response = await fetch(`${apiUrl}/surgery/update/${surgeryId}`, {
         method: "PUT",
         headers: {
@@ -229,7 +221,7 @@ function Dashboard() {
           <main className="col-span-1 lg:col-span-3 bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 space-y-8">
             <form
               onSubmit={(e) => {
-                editmode ? updatehandler(id) : submithandler(e);
+                editmode ? updatehandler(surgeryId) : submithandler(e);
               }}
               className="space-y-8 bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8"
             >
