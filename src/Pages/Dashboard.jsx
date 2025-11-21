@@ -152,162 +152,208 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-cover bg-center">
       <div className="bg-black bg-opacity-70 min-h-screen p-6">
-        <main className="mx-auto max-w-6xl bg-white rounded-xl shadow-lg p-8 space-y-8">
-          {/* FORM */}
-          <form
-            onSubmit={(e) => (editmode ? updatehandler(e) : submithandler(e))}
-            className="space-y-8 bg-gray-50 rounded-xl p-6"
-          >
-            <h3 className="text-2xl font-bold">📝 Schedule a Surgery</h3>
+        <header className="bg-gray-700 text-white p-6 shadow-lg">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Welcome to your Carelink Hospital 👋 Your health, your schedule — all in one place.
+          </h2>
+        </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
+
+          {/* Sidebar */}
+          <aside className="hidden lg:flex flex-col col-span-1 w-64 bg-white dark:bg-gray-900 rounded-xl shadow-xl p-6">
+            <div className="flex items-center justify-center mb-8">
+              <span className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                🏥Carelink
+              </span>
+            </div>
+
+            <nav className="flex flex-col space-y-2 text-base font-medium">
+              <Link to="/dashboard" className="flex items-center px-4 py-2 rounded-lg hover:bg-blue-100">
+                🏠 <span className="ml-2">Dashboard</span>
+              </Link>
+
+              <Link to="/appointment/:id" className="flex items-center px-4 py-2 rounded-lg hover:bg-blue-100">
+                📅 <span className="ml-2">Appointments</span>
+              </Link>
+
+              <Link to="/profile" className="flex items-center px-4 py-2 rounded-lg hover:bg-blue-100">
+                👤 <span className="ml-2">Profile</span>
+              </Link>
+
+              <Link to="/logout" className="flex items-center px-4 py-2 rounded-lg text-red-600 hover:bg-red-100">
+                🚪 <span className="ml-2">Logout</span>
+              </Link>
+            </nav>
+
+            <div className="mt-auto pt-6 text-xs text-gray-500">© 2025 Carelink</div>
+          </aside>
+
+          {/* MAIN */}
+          <main className="mx-auto max-w-6xl bg-white rounded-xl shadow-lg p-8 space-y-8">
+
+            {/* FORM */}
+            <form
+              onSubmit={(e) => (editmode ? updatehandler(e) : submithandler(e))}
+              className="space-y-8 bg-gray-50 rounded-xl p-6"
+            >
+              <h3 className="text-2xl font-bold">📝 Schedule a Surgery</h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label className="font-semibold">Surgery Type</label>
+                  <select
+                    value={surgeryType}
+                    required
+                    onChange={(e) => setSurgeryType(e.target.value)}
+                    className="w-full border rounded-lg px-4 py-2"
+                  >
+                    <option value="">Select Surgery Type</option>
+                    <option value="Opthalmic">Opthalmic</option>
+                    <option value="Neurosurgery">Neurosurgery</option>
+                    <option value="Cardiac Surgery">Cardiac Surgery</option>
+                    <option value="Orthopedic Surgery">Orthopedic Surgery</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="font-semibold">Doctor</label>
+                  <select
+                    value={doctorId}
+                    required
+                    onChange={(e) => setDoctorId(e.target.value)}
+                    className="w-full border rounded-lg px-4 py-2"
+                  >
+                    <option value="">Select Doctor</option>
+                    <option value="1">Dr. Fausat Olayiwola</option>
+                    <option value="2">Dr. Adedoyin Odufuwa</option>
+                    <option value="3">Dr. Oluwaseun Sodipo</option>
+                    <option value="4">Dr. Badmus Opeyemi</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="font-semibold">Date</label>
+                  <input
+                    type="date"
+                    value={surgeryDate}
+                    required
+                    onChange={(e) => setSurgeryDate(e.target.value)}
+                    className="w-full border rounded-lg px-4 py-2"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-semibold">Time</label>
+                  <input
+                    type="time"
+                    value={time}
+                    required
+                    onChange={(e) => setTime(e.target.value)}
+                    className="w-full border rounded-lg px-4 py-2"
+                  />
+                </div>
+              </div>
+
               <div>
-                <label className="font-semibold">Surgery Type</label>
-                <select
-                  value={surgeryType}
-                  required
-                  onChange={(e) => setSurgeryType(e.target.value)}
+                <label className="font-semibold">Description</label>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows="4"
                   className="w-full border rounded-lg px-4 py-2"
+                ></textarea>
+              </div>
+
+              <div className="flex justify-end gap-4">
+                <button
+                  type="button"
+                  onClick={clearForm}
+                  className="px-6 py-2 bg-gray-600 text-white rounded-lg"
                 >
-                  <option value="">Select Surgery Type</option>
-                  <option value="Opthalmic">Opthalmic</option>
-                  <option value="Neurosurgery">Neurosurgery</option>
-                  <option value="Cardiac Surgery">Cardiac Surgery</option>
-                  <option value="Orthopedic Surgery">Orthopedic Surgery</option>
-                </select>
+                  Clear
+                </button>
+
+                <button type="submit" className="px-6 py-2 bg-blue-600 text-white rounded-lg">
+                  {editmode ? "Update Appointment" : "Create Appointment"}
+                </button>
               </div>
+            </form>
 
-              <div>
-                <label className="font-semibold">Doctor</label>
-                <select
-                  value={doctorId}
-                  required
-                  onChange={(e) => setDoctorId(e.target.value)}
-                  className="w-full border rounded-lg px-4 py-2"
-                >
-                  <option value="">Select Doctor</option>
-                  <option value="1">Dr. Fausat Olayiwola</option>
-                  <option value="2">Dr. Adedoyin Odufuwa</option>
-                  <option value="3">Dr. Oluwaseun Sodipo</option>
-                  <option value="4">Dr. Badmus Opeyemi</option>
-                </select>
-              </div>
+            {/* SURGERY TABLE */}
+            <div className="mt-10">
+              <h2 className="text-2xl font-bold mb-4">📋 Scheduled Surgeries</h2>
 
-              <div>
-                <label className="font-semibold">Date</label>
-                <input
-                  type="date"
-                  value={surgeryDate}
-                  required
-                  onChange={(e) => setSurgeryDate(e.target.value)}
-                  className="w-full border rounded-lg px-4 py-2"
-                />
-              </div>
-
-              <div>
-                <label className="font-semibold">Time</label>
-                <input
-                  type="time"
-                  value={time}
-                  required
-                  onChange={(e) => setTime(e.target.value)}
-                  className="w-full border rounded-lg px-4 py-2"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="font-semibold">Description</label>
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows="4"
-                className="w-full border rounded-lg px-4 py-2"
-              ></textarea>
-            </div>
-
-            <div className="flex justify-end gap-4">
-              <button
-                type="button"
-                onClick={clearForm}
-                className="px-6 py-2 bg-gray-600 text-white rounded-lg"
-              >
-                Clear
-              </button>
-
-              <button
-                type="submit"
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg"
-              >
-                {editmode ? "Update Appointment" : "Create Appointment"}
-              </button>
-            </div>
-          </form>
-
-          {/* SURGERY LIST */}
-          <div>
-            <h2 className="text-2xl font-bold text-center mb-4">
-              Scheduled Surgeries
-            </h2>
-
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-6 py-3 text-left">Surgery</th>
-                  <th className="px-6 py-3 text-left">Date</th>
-                  <th className="px-6 py-3 text-left">Time</th>
-                  <th className="px-6 py-3 text-left">Description</th>
-                  <th className="px-6 py-3 text-left">Doctor</th>
-                  <th className="px-6 py-3 text-center">Actions</th>
-                </tr>
-              </thead>
-
-              <tbody className="bg-white divide-y divide-gray-200">
-                {localSurgeries.length === 0 ? (
+              <table className="min-w-full divide-y divide-gray-300">
+                <thead className="bg-gray-100">
                   <tr>
-                    <td className="text-center py-6" colSpan="6">
-                      No surgeries scheduled
-                    </td>
+                    <th className="px-6 py-3 text-left">Surgery</th>
+                    <th className="px-6 py-3 text-left">Date</th>
+                    <th className="px-6 py-3 text-left">Time</th>
+                    <th className="px-6 py-3 text-left">Description</th>
+                    <th className="px-6 py-3 text-left">Doctor</th>
+                    <th className="px-6 py-3 text-center">Actions</th>
                   </tr>
-                ) : (
-                  localSurgeries.map((surgery) => (
-                    <tr key={surgery.id}>
-                      <td className="px-6 py-4">{surgery.surgeryType}</td>
-                      <td className="px-6 py-4">{surgery.surgeryDate}</td>
-                      <td className="px-6 py-4">{surgery.time}</td>
-                      <td className="px-6 py-4">{surgery.description}</td>
-                      <td className="px-6 py-4">{surgery.doctor?.name}</td>
+                </thead>
 
-                      <td className="px-6 py-4 flex gap-2 justify-center">
-                        <button
-                          onClick={() => {
-                            setEditMode(true);
-                            setSurgeryId(surgery.id); // FIXED
-                            setDescription(surgery.description);
-                            setSurgeryDate(surgery.surgeryDate);
-                            setDoctorId(surgery.doctor?.id); // FIXED
-                            setTime(surgery.time);
-                            setSurgeryType(surgery.surgeryType);
-                          }}
-                          className="px-4 py-2 bg-green-600 text-white rounded-lg"
-                        >
-                          Update
-                        </button>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  <>
+                    {localSurgeries.length === 0 ? (
+                      <tr>
+                        <td className="text-center py-6" colSpan="6">
+                          No surgeries scheduled
+                        </td>
+                      </tr>
+                    ) : (
+                      localSurgeries.map((surgery) => (
+                        <tr key={surgery.id}>
+                          <td className="px-6 py-4">{surgery.surgeryType}</td>
+                          <td className="px-6 py-4">{surgery.surgeryDate}</td>
+                          <td className="px-6 py-4">{surgery.time}</td>
+                          <td className="px-6 py-4">{surgery.description}</td>
+                          <td className="px-6 py-4">{surgery.doctor?.name}</td>
 
-                        <button
-                          onClick={() => deleteSurgery(surgery.id)}
-                          className="px-4 py-2 bg-red-600 text-white rounded-lg"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </main>
+                          <td className="px-6 py-4 flex gap-2 justify-center">
+
+                            <Link
+  to={`/appointment/${surgery.id}`}
+  className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+>
+  View More
+</Link>
+
+                            <button
+                              onClick={() => {
+                                setEditMode(true);
+                                setSurgeryId(surgery.id);
+                                setDescription(surgery.description);
+                                setSurgeryDate(surgery.surgeryDate);
+                                setDoctorId(surgery.doctor?.id);
+                                setTime(surgery.time);
+                                setSurgeryType(surgery.surgeryType);
+                              }}
+                              className="px-4 py-2 bg-green-600 text-white rounded-lg"
+                            >
+                              Update
+                            </button>
+
+                            <button
+                              onClick={() => deleteSurgery(surgery.id)}
+                              className="px-4 py-2 bg-red-600 text-white rounded-lg"
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </>
+                </tbody>
+              </table>
+            </div>
+
+          </main>
+        </div>
       </div>
     </div>
   );
